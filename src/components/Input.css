@@ -1,0 +1,60 @@
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
+}
+
+.campo label {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--cor-laranja);
+}
+
+.campo__caixa {
+  position: relative;
+}
+
+.campo__caixa input {
+  width: 100%;
+  padding: 0.7rem 1.25rem;
+  font-size: 1rem;
+  color: var(--cor-texto);
+  background-color: var(--cor-branco);
+  border: 2px solid var(--cor-laranja);
+  border-radius: 999px;
+  transition: box-shadow var(--transicao);
+}
+
+.campo__caixa input::placeholder {
+  font-size: 0.9rem;
+  color: var(--cor-laranja);
+  opacity: 1;
+}
+
+.campo__caixa input:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cor-laranja) 30%, transparent);
+  outline: 2px solid transparent;
+}
+
+.campo__caixa--com-icone input {
+  padding-right: 3.25rem;
+}
+
+.campo__olho {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  padding: 0.25rem;
+  color: var(--cor-laranja);
+  background: none;
+  border: none;
+  border-radius: 50%;
+  transition: color var(--transicao);
+}
+
+.campo__olho:hover {
+  color: var(--cor-laranja-escuro);
+}

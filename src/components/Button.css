@@ -1,0 +1,18 @@
+.botao {
+  padding: 0.7rem 2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cor-branco);
+  background-color: var(--cor-laranja);
+  border: none;
+  border-radius: 999px;
+  transition: background-color var(--transicao), transform var(--transicao);
+}
+
+.botao:hover {
+  background-color: var(--cor-laranja-escuro);
+}
+
+.botao:active {
+  transform: translateY(1px);
+}
