@@ -2,15 +2,29 @@
   padding: 0.7rem 2rem;
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--cor-branco);
-  background-color: var(--cor-laranja);
-  border: none;
+  border: 2px solid var(--cor-laranja);
   border-radius: 999px;
-  transition: background-color var(--transicao), transform var(--transicao);
+  transition: background-color var(--transicao), border-color var(--transicao),
+    transform var(--transicao);
 }
 
-.botao:hover {
+.botao--primario {
+  color: var(--cor-branco);
+  background-color: var(--cor-laranja);
+}
+
+.botao--primario:hover {
   background-color: var(--cor-laranja-escuro);
+  border-color: var(--cor-laranja-escuro);
+}
+
+.botao--contorno {
+  color: var(--cor-laranja);
+  background-color: var(--cor-branco);
+}
+
+.botao--contorno:hover {
+  background-color: color-mix(in srgb, var(--cor-laranja) 12%, white);
 }
 
 .botao:active {

@@ -1,11 +1,7 @@
-import "./Button.css";
-
-function Button({ children, type = "button", ...props }) {
+function Button({ children, type = "button", variante = "primario", ...props }) {
   return (
-    <button className="botao" type={type} {...props}>
+    <button className={`botao botao--${variante}`} type={type} {...props}>
       {children}
     </button>
   );
 }
-
-export default Button;
