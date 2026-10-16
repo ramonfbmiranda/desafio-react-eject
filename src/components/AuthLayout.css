@@ -1,0 +1,133 @@
+.auth {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  background-color: var(--cor-marrom);
+}
+
+/* lAdo marrom */
+.auth__visual {
+
+  position: relative;
+  flex: 1 1 58%;
+  overflow: hidden;
+}
+
+.auth__mascote {
+  position: absolute;
+  max-width: none;
+}
+
+/* Login: aparece o pé direito */
+
+.auth--pe-direito .auth__mascote {
+  top: 14%;
+  left: -34%;
+  width: 132%;
+}
+
+/* Resto com  o pé esquerdo */
+
+.auth--pe-esquerdo .auth__mascote {
+  top: 22%;
+  left: 0;
+  width: 140%;
+}
+
+.auth__logotipo {
+  position: absolute;
+  left: 10%;
+  bottom: 3%;
+  width: clamp(9rem, 26%, 16rem);
+}
+
+/*  Painel branco  */
+
+.auth__painel {
+  flex: 0 0 42%;
+  display: flex;
+  align-items: center;
+  padding: var(--espaco-5) var(--espaco-5) var(--espaco-5)
+    clamp(2rem, 9.5%, 6rem);
+  background-color: var(--cor-branco);
+  border-radius: 3.75rem 0 0 3.75rem;
+}
+
+.auth__conteudo {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.auth__titulo {
+  margin-bottom: var(--espaco-6);
+  font-family: var(--fonte);
+  font-size: clamp(2rem, 3.6vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--cor-laranja);
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.auth__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espaco-3);
+  font-weight: 500;
+}
+
+.auth__links a {
+  text-decoration: none;
+}
+
+.auth__links a:hover {
+  text-decoration: underline;
+}
+
+.auth__acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--espaco-3);
+}
+
+/*  MOBILE (CELULAR E TABLET)  */
+
+@media (max-width: 900px) {
+  .auth {
+    flex-direction: column;
+  }
+
+  .auth__visual {
+    flex: 0 0 11rem;
+  }
+
+  .auth__logotipo {
+    display: none;
+  }
+
+  .auth--pe-direito .auth__mascote {
+    top: 8%;
+    left: -15%;
+    width: 120%;
+  }
+
+  .auth--pe-esquerdo .auth__mascote {
+    top: 8%;
+    left: -10%;
+    width: 120%;
+  }
+
+  .auth__painel {
+    flex: 1;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: -1.5rem;
+    padding: var(--espaco-5) var(--espaco-4);
+    border-radius: 2rem 2rem 0 0;
+  }
+}
