@@ -1,15 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import AuthLayout from "../components/AuthLayout";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import mascote from "../assets/mascote.png";
-import logotipo from "../assets/logotipo.png";
-import "./Login.css";
 
 function Login() {
-  const [dados, setDados] = useState({
-    email: "",
-    senha: "",
-  });
+  const [dados, setDados] = useState({ email: "", senha: "" });
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -22,49 +18,38 @@ function Login() {
   }
 
   return (
-    <main className="login">
-      <aside className="login__visual">
-        <img className="login__mascote" src={mascote} alt="" />
-        <img className="login__logotipo" src={logotipo} alt="Theka" />
-      </aside>
+    <AuthLayout titulo="Login" lado="direito">
+      <form className="auth__form" onSubmit={handleSubmit}>
+        <Input
+          label="E-mail"
+          type="email"
+          name="email"
+          value={dados.email}
+          onChange={handleChange}
+          placeholder="seuemail@email.com"
+          autoComplete="email"
+        />
 
-      <section className="login__painel">
-        <div className="login__conteudo">
-          <h1 className="login__titulo">Login</h1>
+        <Input
+          label="Senha"
+          type="password"
+          name="senha"
+          value={dados.senha}
+          onChange={handleChange}
+          placeholder="********"
+          autoComplete="current-password"
+        />
 
-          <form className="login__form" onSubmit={handleSubmit}>
-            <Input
-              label="E-mail"
-              type="email"
-              name="email"
-              value={dados.email}
-              onChange={handleChange}
-              placeholder="seuemail@email.com"
-              autoComplete="email"
-            />
-
-            <Input
-              label="Senha"
-              type="password"
-              name="senha"
-              value={dados.senha}
-              onChange={handleChange}
-              placeholder="********"
-              autoComplete="current-password"
-            />
-
-            <div className="login__links">
-              <a href="/recuperar-senha">Esqueceu a senha?</a>
-              <a href="/cadastro">Ainda não tem cadastro?</a>
-            </div>
-
-            <div className="login__acoes">
-              <Button type="submit">Entrar</Button>
-            </div>
-          </form>
+        <div className="auth__links">
+          <Link to="/recuperar-senha">Esqueceu a senha?</Link>
+          <Link to="/cadastro">Ainda não tem cadastro?</Link>
         </div>
-      </section>
-    </main>
+
+        <div className="auth__acoes">
+          <Button type="submit">Entrar</Button>
+        </div>
+      </form>
+    </AuthLayout>
   );
 }
 
