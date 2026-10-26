@@ -2,6 +2,10 @@
 
 Repositório desenvolvido para o processo de trainee da **EJECT** (Empresa Júnior da Escola de Ciência e Tecnologia), vinculada a UFRN. O objetivo deste projeto é a implementação de uma interface web a partir de um protótipo do Figma utilizando **React**.
 
+# OBJETIVO:
+
+Desenvolver um site para Theka, uma biblioteca moderna e acessível, com uma estética animada, colorida e descontraída, voltado principalmente para jovens, estudantes e leitores curiosos. O site deve promover o acesso ao acervo da biblioteca, contar a história da instituição e oferecer um canal de comunicação prático e acolhedor.
+
 ## 🚀 Tecnologias Utilizadas
 
 * **React**
