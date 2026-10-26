@@ -1,0 +1,189 @@
+.material {
+  --vinho: #7a0036;
+  min-height: 100vh;
+  background: var(--cor-branco);
+  color: var(--vinho);
+}
+
+.material__header {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: var(--espaco-4) var(--espaco-3) var(--espaco-3);
+}
+
+.material__folha {
+  width: 2.8rem;
+  height: 2.2rem;
+  border-radius: 100% 0 100% 0;
+  background: #555;
+  transform: rotate(-10deg);
+}
+
+.material__marca {
+  flex: 1;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  background: #f4f4f4;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #4a4a4a;
+}
+
+.material__main {
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 0 var(--espaco-3) var(--espaco-5);
+}
+
+.material__titulo {
+  margin-bottom: var(--espaco-4);
+  font-size: 2.1rem;
+  line-height: 1.1;
+}
+
+/* Capa */
+.material__capa {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 60%;
+  aspect-ratio: 3 / 4.3;
+  margin: 0 auto var(--espaco-5);
+  border-radius: 1.2rem;
+  background: #a3a3a3;
+  color: rgb(255 255 255 / 85%);
+}
+
+.material__capa svg {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.material__capa--preenchida {
+  background: #fdd600;
+}
+
+.material__upload {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 999px;
+  background: #7d7d7d;
+  color: var(--cor-branco);
+  font-weight: 700;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.material__upload svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* Formulário */
+.material__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+}
+
+.material__linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaco-3);
+}
+
+.material__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.material__campo label {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.material__campo input,
+.material__campo select,
+.material__campo textarea {
+  width: 100%;
+  padding: 0.7rem 1.1rem;
+  border: 2px solid var(--vinho);
+  border-radius: 999px;
+  background: var(--cor-branco);
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.material__campo textarea {
+  resize: vertical;
+  border-radius: 1.2rem;
+}
+
+.material__campo ::placeholder {
+  color: #777;
+  opacity: 1;
+}
+
+.material__select {
+  position: relative;
+}
+
+.material__select select {
+  appearance: none;
+  padding-right: 2.5rem;
+}
+
+.material__select svg {
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Botões */
+.material__acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--espaco-3);
+}
+
+.material__acoes--entre {
+  justify-content: space-between;
+}
+
+.material__botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.6rem;
+  border: 2px solid var(--vinho);
+  border-radius: 999px;
+  background: var(--vinho);
+  color: var(--cor-branco);
+  font-weight: 700;
+}
+
+.material__botao--contorno {
+  background: var(--cor-branco);
+  color: var(--vinho);
+}
+
+.material__botao--largo {
+  width: 100%;
+}
