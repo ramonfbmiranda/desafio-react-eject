@@ -1,0 +1,64 @@
+.rodape {
+  padding: var(--espaco-5) var(--espaco-4) var(--espaco-4);
+  background: #7a0036;
+  color: var(--cor-branco);
+}
+
+.rodape__marca {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--espaco-4);
+}
+
+.rodape__marca strong {
+  font-size: 3rem;
+  line-height: 1;
+  color: #f565a8;
+}
+
+.rodape__marca span {
+  font-size: 0.7rem;
+}
+
+.rodape__colunas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-4);
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.rodape h2 {
+  margin-bottom: var(--espaco-2);
+  font-size: 1.6rem;
+}
+
+.rodape ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.rodape li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.rodape__credito {
+  margin-top: var(--espaco-5);
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+@media (min-width: 900px) {
+  .rodape__colunas {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+} 
