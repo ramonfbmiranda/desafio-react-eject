@@ -86,7 +86,7 @@ function Acervo() {
       {/* Novidades */}
       <section className="acervo__hero">
         <div className="acervo__hero-texto">
-          <h1>Novidades da semana</h1>
+          <h1>Novidades<br />da<br />semana</h1>  
           {destaque && (
             <div>
               <p className="acervo__hero-livro">{destaque.titulo}</p>

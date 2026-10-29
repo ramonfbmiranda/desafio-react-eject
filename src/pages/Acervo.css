@@ -7,9 +7,9 @@
 
 /* Cabeçalho */
 .acervo__header {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  gap: 100px;
   padding: 55px calc(var(--margem) + 56px) 0;
 }
 
@@ -22,18 +22,18 @@
 
 .acervo__nav {
   display: flex;
-  gap: 18rem;
+  gap: 300px;
 }
 
 .acervo__nav a {
-  font-size: 1.75rem;
+  font-size: 1.875rem;
   font-weight: 700;
   color: var(--cor-cinza-medio);
   text-decoration: none;
 }
 
 .acervo__usuario {
-  justify-self: end;
+  margin-left: 200px;
   border: none;
   background: none;
   color: var(--cor-cinza-medio);
@@ -61,13 +61,13 @@
 }
 
 .acervo__hero-livro {
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   font-weight: 700;
   line-height: 1.2;
 }
 
 .acervo__hero-autor {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 .acervo__carrossel {
@@ -110,7 +110,7 @@
 
 .acervo__catalogo h2 {
   margin-bottom: var(--espaco-4);
-  font-size: 3rem;
+  font-size: 3.6rem;
   line-height: 1.1;
   color: var(--cor-vinho);
 }
@@ -259,6 +259,8 @@
   }
 
   .acervo__header {
+    justify-content: space-between;
+    gap: var(--espaco-3);
     padding: 1rem var(--margem) 0;
   }
 
@@ -273,6 +275,10 @@
 
   .acervo__nav a {
     font-size: 1rem;
+  }
+
+  .acervo__usuario {
+    margin-left: 0;
   }
 
   .acervo__hero {
