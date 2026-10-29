@@ -220,3 +220,11 @@
   background: #a3a3a3;
   overflow: hidden;
 }
+
+.acervo__capa img,
+.acervo__destaque img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

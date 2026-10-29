@@ -106,15 +106,17 @@ const destaques = livros.slice(0, 5);
         <ul className="acervo__grade">
           {livros.map((livro) => (
           <li key={livro.id}>
-          <div className="acervo__capa">
-            {urlCapa(livro) && (
-              <img
-                src={urlCapa(livro)}
-                alt={livro.titulo}
-                onError={(e) => (e.currentTarget.style.display = "none")}
-              />
-            )}
-          </div>
+            <Link to={`/editar-material/${livro.id}`}>
+              <div className="acervo__capa">
+                {urlCapa(livro) && (
+                  <img
+                    src={urlCapa(livro)}
+                    alt={livro.titulo}
+                    onError={(e) => (e.currentTarget.style.display = "none")}
+                  />
+                )}
+              </div>
+            </Link>
           </li>
           ))}
         </ul>
