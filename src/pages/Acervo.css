@@ -214,3 +214,9 @@
   .acervo__grade { grid-template-columns: repeat(2, 1fr); }
   .acervo__footer { grid-template-columns: 1fr 1fr; }
 }
+
+.acervo__capa,
+.acervo__destaque {
+  background: #a3a3a3;
+  overflow: hidden;
+}

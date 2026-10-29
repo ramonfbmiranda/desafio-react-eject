@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import "./Acervo.css";
+import { useEffect, useState } from "react";
+import { listarLivros } from "../services/api";
+import { urlCapa } from "../services/isbn";
 
-const livros = [
+/* SEÇÃO DE LIVROS INICIAIS (NÃO ESTÁ SENDO USADA MAIS, DEVIDO AO CONSUMO DE API, PODE SER ÚTIL PARA TESTES) 
+  const livros = [
   { titulo: "A cabeça do santo", cor: "#f7d417" },
   { titulo: "Oração para desaparecer", cor: "#7fbde6" },
   { titulo: "A biblioteca da meia-noite", cor: "#2f7a3d" },
@@ -20,7 +24,7 @@ const livros = [
 ];
 
 const destaques = livros.slice(0, 5);
-
+*/
 function IconeUsuario() {
   return (
     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -31,6 +35,20 @@ function IconeUsuario() {
 }
 
 function Acervo() {
+const [livros, setLivros] = useState([]);
+const [erro, setErro] = useState("");
+
+useEffect(() => {
+  let cancelado = false;
+  listarLivros()
+    .then((dados) => !cancelado && setLivros(dados))
+    .catch((e) => !cancelado && setErro(e.message));
+  return () => {
+    cancelado = true;
+  };
+}, []);
+
+const destaques = livros.slice(0, 5);
   return (
     <div className="acervo">
       {/* Cabeçalho */}
@@ -56,12 +74,14 @@ function Acervo() {
         <div className="acervo__carrossel">
           {destaques.map((livro, i) => (
             <div
-              key={livro.titulo}
-              className={`acervo__destaque ${i === 0 ? "acervo__destaque--ativo" : ""}`}
-              style={{ backgroundColor: livro.cor }}
-              role="img"
-              aria-label={livro.titulo}
+            key={livro.id}
+            className={`acervo__destaque ${i === 0 ? "acervo__destaque--ativo" : ""}`}>
+            {urlCapa(livro) && (
+            <img src={urlCapa(livro)} alt={livro.titulo}
+            onError={(e) => (e.currentTarget.style.display = "none")}
             />
+            )}
+            </div>
           ))}
         </div>
       </section>
@@ -81,16 +101,21 @@ function Acervo() {
           <button type="submit">Buscar</button>
         </form>
 
+{erro && <p role="alert">{erro}</p>}
+
         <ul className="acervo__grade">
           {livros.map((livro) => (
-            <li key={livro.titulo}>
-              <div
-                className="acervo__capa"
-                style={{ backgroundColor: livro.cor }}
-                role="img"
-                aria-label={livro.titulo}
+          <li key={livro.id}>
+          <div className="acervo__capa">
+            {urlCapa(livro) && (
+              <img
+                src={urlCapa(livro)}
+                alt={livro.titulo}
+                onError={(e) => (e.currentTarget.style.display = "none")}
               />
-            </li>
+            )}
+          </div>
+          </li>
           ))}
         </ul>
 
