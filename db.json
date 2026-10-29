@@ -1,0 +1,15 @@
+{
+  "livros": [
+    {
+      "id": "1",
+      "titulo": "A cabeça do santo",
+      "autor": "Socorro Acioli",
+      "ano": 2016,
+      "paginas": 176,
+      "isbn": "",
+      "editora": "Companhia das Letras",
+      "resumo": "Um jovem que viaja para a cidade de Candeia para cumprir o pedido de sua mãe moribunda: encontrar o pai desconhecido.",
+      "capaUrl": ""
+    }
+  ]
+}
