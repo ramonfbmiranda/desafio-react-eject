@@ -1,5 +1,5 @@
 .material {
-  --vinho: #7a0036;
+    --vinho: var(--cor-vinho);
   min-height: 100vh;
   background: var(--cor-branco);
   color: var(--vinho);

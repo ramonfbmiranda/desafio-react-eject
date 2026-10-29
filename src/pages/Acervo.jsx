@@ -1,54 +1,74 @@
 import { Link } from "react-router-dom";
-import "./Acervo.css";
 import { useEffect, useState } from "react";
+import "./Acervo.css";
+import Rodape from "../components/Rodape";
 import { listarLivros } from "../services/api";
 import { urlCapa } from "../services/isbn";
 
-/* SEÇÃO DE LIVROS INICIAIS (NÃO ESTÁ SENDO USADA MAIS, DEVIDO AO CONSUMO DE API, PODE SER ÚTIL PARA TESTES) 
-  const livros = [
-  { titulo: "A cabeça do santo", cor: "#f7d417" },
-  { titulo: "Oração para desaparecer", cor: "#7fbde6" },
-  { titulo: "A biblioteca da meia-noite", cor: "#2f7a3d" },
-  { titulo: "Nunca vi a chuva", cor: "#e0a52b" },
-  { titulo: "Canção para ninar menino grande", cor: "#b8793f" },
-  { titulo: "Três", cor: "#e8a0b4" },
-  { titulo: "O avesso da pele", cor: "#8fb0c9" },
-  { titulo: "Garota, mulher, outras", cor: "#4a4a4a" },
-  { titulo: "Flores", cor: "#d97a7a" },
-  { titulo: "Amor(es) verdadeiro(s)", cor: "#6aa59a" },
-  { titulo: "Daisy Jones & The Six", cor: "#2a1a2e" },
-  { titulo: "Torto arado", cor: "#f2b8a2" },
-  { titulo: "O conto da aia", cor: "#d9d9d9" },
-  { titulo: "Os dias de verão", cor: "#12a37f" },
-  { titulo: "Viola Davis", cor: "#c9c9c9" },
-];
-
-const destaques = livros.slice(0, 5);
-*/
 function IconeUsuario() {
   return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
       <circle cx="12" cy="8" r="4" />
       <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
     </svg>
   );
 }
 
+function IconeSeta() {
+  return (
+    <svg viewBox="0 0 36 36" width="36" height="36" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="18" cy="18" r="16" />
+      <path d="M11 18h14M19 12l6 6-6 6" />
+    </svg>
+  );
+}
+
+function IconeBusca() {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <path d="M20 20l-4-4" />
+    </svg>
+  );
+}
+
+function IconeMais() {
+  return (
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
+function ImgCapa({ livro }) {
+  const src = urlCapa(livro);
+  if (!src) return null;
+  return (
+    <img
+      src={src}
+      alt={livro.titulo}
+      onError={(e) => (e.currentTarget.style.display = "none")}
+    />
+  );
+}
+
 function Acervo() {
-const [livros, setLivros] = useState([]);
-const [erro, setErro] = useState("");
+  const [livros, setLivros] = useState([]);
+  const [erro, setErro] = useState("");
 
-useEffect(() => {
-  let cancelado = false;
-  listarLivros()
-    .then((dados) => !cancelado && setLivros(dados))
-    .catch((e) => !cancelado && setErro(e.message));
-  return () => {
-    cancelado = true;
-  };
-}, []);
+  useEffect(() => {
+    let cancelado = false;
+    listarLivros()
+      .then((dados) => !cancelado && setLivros(dados))
+      .catch((e) => !cancelado && setErro(e.message));
+    return () => {
+      cancelado = true;
+    };
+  }, []);
 
-const destaques = livros.slice(0, 5);
+  const destaques = livros.slice(0, 5);
+  const destaque = destaques[0];
+
   return (
     <div className="acervo">
       {/* Cabeçalho */}
@@ -67,20 +87,30 @@ const destaques = livros.slice(0, 5);
       <section className="acervo__hero">
         <div className="acervo__hero-texto">
           <h1>Novidades da semana</h1>
-          <p className="acervo__hero-livro">A cabeça do santo</p>
-          <p className="acervo__hero-autor">Socorro Acioli - 2014</p>
+          {destaque && (
+            <div>
+              <p className="acervo__hero-livro">{destaque.titulo}</p>
+              <p className="acervo__hero-autor">
+                {destaque.autor} - {destaque.ano}
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="acervo__carrossel">
           {destaques.map((livro, i) => (
             <div
-            key={livro.id}
-            className={`acervo__destaque ${i === 0 ? "acervo__destaque--ativo" : ""}`}>
-            {urlCapa(livro) && (
-            <img src={urlCapa(livro)} alt={livro.titulo}
-            onError={(e) => (e.currentTarget.style.display = "none")}
-            />
-            )}
+              key={livro.id}
+              className={`acervo__destaque ${i === 0 ? "acervo__destaque--ativo" : ""}`}
+            >
+              <ImgCapa livro={livro} />
+              <Link
+                className="acervo__destaque-link"
+                to={`/editar-material/${livro.id}`}
+                aria-label={`Abrir ${livro.titulo}`}
+              >
+                <IconeSeta />
+              </Link>
             </div>
           ))}
         </div>
@@ -98,26 +128,22 @@ const destaques = livros.slice(0, 5);
           <select aria-label="Ordenar" defaultValue="">
             <option value="" disabled>Ordem</option>
           </select>
-          <button type="submit">Buscar</button>
+          <button type="submit">
+            Buscar <IconeBusca />
+          </button>
         </form>
 
-{erro && <p role="alert">{erro}</p>}
+        {erro && <p role="alert">{erro}</p>}
 
         <ul className="acervo__grade">
           {livros.map((livro) => (
-          <li key={livro.id}>
-            <Link to={`/editar-material/${livro.id}`}>
-              <div className="acervo__capa">
-                {urlCapa(livro) && (
-                  <img
-                    src={urlCapa(livro)}
-                    alt={livro.titulo}
-                    onError={(e) => (e.currentTarget.style.display = "none")}
-                  />
-                )}
-              </div>
-            </Link>
-          </li>
+            <li key={livro.id}>
+              <Link to={`/editar-material/${livro.id}`}>
+                <div className="acervo__capa">
+                  <ImgCapa livro={livro} />
+                </div>
+              </Link>
+            </li>
           ))}
         </ul>
 
@@ -130,39 +156,11 @@ const destaques = livros.slice(0, 5);
         </nav>
       </section>
 
-      {/* Rodapé */}
-      <footer className="acervo__footer">
-        <div className="acervo__footer-marca">
-          <strong>Theka</strong>
-          <span>Biblioteca</span>
-        </div>
+      <Link to="/adicionar-material" className="acervo__adicionar" aria-label="Adicionar material">
+        <IconeMais />
+      </Link>
 
-        <div>
-          <h3>Contato</h3>
-          <ul>
-            <li>(84) 9 9999-2222</li>
-            <li>www.theka.com.br</li>
-            <li>Natal, RN</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3>Redes sociais</h3>
-          <ul>
-            <li>@theka.biblioteca</li>
-            <li>@theka.biblioteca</li>
-            <li>@theka.biblioteca</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3>Ajuda</h3>
-          <ul>
-            <li>Central de ajuda</li>
-            <li>FAQ</li>
-          </ul>
-        </div>
-      </footer>
+      <Rodape />
     </div>
   );
 }

@@ -6,6 +6,15 @@
   --cor-branco: #ffffff;
   --cor-texto: #3a2008;
 
+  /* Acervo */
+  --cor-vinho: #81013a;
+  --cor-rosa: #ff83a5;
+  --cor-rosa-logo: #f36ec7;
+  --cor-cinza-escuro: #393939;
+  --cor-cinza-medio: #5a5a5a;
+  --cor-cinza-claro: #cacac9;
+  --cor-capa: #eaeaea;
+
   /* Fonte */
   --fonte: "DM Sans", system-ui, -apple-system, sans-serif;
 

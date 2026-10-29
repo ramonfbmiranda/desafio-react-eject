@@ -1,6 +1,6 @@
 .rodape {
   padding: var(--espaco-5) var(--espaco-4) var(--espaco-4);
-  background: #7a0036;
+  background: var(--cor-vinho);
   color: var(--cor-branco);
 }
 
@@ -14,7 +14,7 @@
 .rodape__marca strong {
   font-size: 3rem;
   line-height: 1;
-  color: #f565a8;
+  color: var(--cor-rosa-logo);
 }
 
 .rodape__marca span {
