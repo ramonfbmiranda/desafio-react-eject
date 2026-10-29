@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Rodape from "./Rodape";
 import "./FormMaterial.css";
+import { buscarPorIsbn, limparIsbn } from "../services/isbn";
 
 function Icone({ children }) {
   return (
@@ -22,6 +23,8 @@ function Campo({ label, name, className = "", children }) {
     </div>
   );
 }
+
+const VAZIO = { titulo: "", paginas: "", isbn: "", autor: "", ano: "", editora: "", resumo: "", capaUrl: "" };
 
 function FormMaterial({ modo = "adicionar" }) {
   const navigate = useNavigate();
