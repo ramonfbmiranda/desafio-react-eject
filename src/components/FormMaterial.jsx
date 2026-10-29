@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Rodape from "./Rodape";
 import "./FormMaterial.css";
 import { buscarPorIsbn, limparIsbn } from "../services/isbn";
+import { buscarLivro, criarLivro, atualizarLivro, deletarLivro } from "../services/api";
 
 function Icone({ children }) {
   return (
@@ -29,6 +31,75 @@ const VAZIO = { titulo: "", paginas: "", isbn: "", autor: "", ano: "", editora: 
 function FormMaterial({ modo = "adicionar" }) {
   const navigate = useNavigate();
   const editando = modo === "editar";
+  const { id } = useParams();
+
+  const [valores, setValores] = useState(VAZIO);
+  const [buscandoIsbn, setBuscandoIsbn] = useState(false);
+  const [avisoIsbn, setAvisoIsbn] = useState("");
+  const [erro, setErro] = useState("");
+
+  useEffect(() => {
+    if (editando && id) {
+      buscarLivro(id)
+        .then((livro) => setValores({ ...VAZIO, ...livro }))
+        .catch(() => setErro("Não foi possível carregar o livro."));
+    }
+  }, [editando, id]);
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setValores((v) => ({ ...v, [name]: value }));
+  }
+
+  async function handleIsbnBlur() {
+    const isbn = limparIsbn(valores.isbn);
+    if (isbn.length !== 10 && isbn.length !== 13) return;
+
+    setBuscandoIsbn(true);
+    setAvisoIsbn("");
+    try {
+      const sugestao = await buscarPorIsbn(isbn);
+      if (!sugestao) {
+        setAvisoIsbn("Livro não encontrado. Preencha manualmente.");
+        return;
+      }
+      // só preenche o que ainda está vazio, sem apagar o que a pessoa digitou
+      setValores((v) => {
+        const novo = { ...v };
+        for (const [campo, valor] of Object.entries(sugestao)) {
+          if (!novo[campo]) novo[campo] = valor;
+        }
+        return novo;
+      });
+    } catch {
+      setAvisoIsbn("Não foi possível consultar agora. Preencha manualmente.");
+    } finally {
+      setBuscandoIsbn(false);
+    }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setErro("");
+    const dados = { ...valores, paginas: Number(valores.paginas), ano: Number(valores.ano) };
+    try {
+      if (editando) await atualizarLivro(id, dados);
+      else await criarLivro(dados);
+      navigate("/acervo");
+    } catch {
+      setErro("Não foi possível salvar. Confira se a API está rodando.");
+    }
+  }
+
+  async function handleDeletar() {
+    setErro("");
+    try {
+      await deletarLivro(id);
+      navigate("/acervo");
+    } catch {
+      setErro("Não foi possível deletar. Confira se a API está rodando.");
+    }
+  }
 
   return (
     <div className="material">
@@ -43,10 +114,13 @@ function FormMaterial({ modo = "adicionar" }) {
         </h1>
 
         {editando ? (
-          <div className="material__capa material__capa--preenchida" role="img" aria-label="Capa de A cabeça do santo" />
+          <div className="material__capa material__capa--preenchida" role="img" aria-label={`Capa de ${valores.titulo}`}>
+            {valores.capaUrl && <img src={valores.capaUrl} alt="" />}
+          </div>
         ) : (
           <div className="material__capa">
             <Icone><rect x="3" y="5" width="16" height="14" rx="2" /><path d="M7 3h14v14M3 15l5-5 5 5 3-3" /></Icone>
+            {valores.capaUrl && <img src={valores.capaUrl} alt="Capa do material" />}
             <button type="button" className="material__upload">
               Adicionar capa
               <Icone><path d="M12 15V3M8 7l4-4 4 4M5 12v8h14v-8" /></Icone>
@@ -54,33 +128,39 @@ function FormMaterial({ modo = "adicionar" }) {
           </div>
         )}
 
-        <form className="material__form" onSubmit={(e) => e.preventDefault()}>
+        <form className="material__form" onSubmit={handleSubmit}>
           <Campo label="Título no material:" name="titulo">
-            <input id="titulo" placeholder="Inserir o título do material" defaultValue={editando ? "A cabeça do santo" : ""} />
+            <input id="titulo" name="titulo" value={valores.titulo} onChange={handleChange} placeholder="Inserir o título do material" />
           </Campo>
 
           <div className="material__linha">
             <Campo label="Número de páginas" name="paginas">
-              <input id="paginas" placeholder="000" defaultValue={editando ? "176" : ""} />
+              <input id="paginas" name="paginas" value={valores.paginas} onChange={handleChange} placeholder="000" />
             </Campo>
             <Campo label="ISBM" name="isbn">
-              <input id="isbn" placeholder="xxxxxxx" defaultValue={editando ? "123456789" : ""} />
+              <input id="isbn" name="isbn" value={valores.isbn} onChange={handleChange} onBlur={handleIsbnBlur} placeholder="xxxxxxx" />
             </Campo>
           </div>
 
+          {buscandoIsbn && <p className="material__aviso">Buscando dados do livro...</p>}
+          {avisoIsbn && <p className="material__aviso" role="status">{avisoIsbn}</p>}
+
           <Campo label="Autor:" name="autor">
-            <input id="autor" placeholder="Machado de Assis" defaultValue={editando ? "Socorro Acioli" : ""} />
+            <input id="autor" name="autor" value={valores.autor} onChange={handleChange} placeholder="Machado de Assis" />
           </Campo>
 
           <div className="material__linha">
             <Campo label="Ano de publicação" name="ano">
-              <input id="ano" placeholder="000" defaultValue={editando ? "2016" : ""} />
+              <input id="ano" name="ano" value={valores.ano} onChange={handleChange} placeholder="000" />
             </Campo>
             <Campo label="Editora" name="editora">
               <div className="material__select">
-                <select id="editora" defaultValue={editando ? "companhia" : ""}>
+                <select id="editora" name="editora" value={valores.editora} onChange={handleChange}>
                   <option value="" disabled>Selecionar</option>
-                  <option value="companhia">Companhia das Letras</option>
+                  <option value="Companhia das Letras">Companhia das Letras</option>
+                  {valores.editora && valores.editora !== "Companhia das Letras" && (
+                    <option value={valores.editora}>{valores.editora}</option>
+                  )}
                 </select>
                 <Seta />
               </div>
@@ -90,16 +170,20 @@ function FormMaterial({ modo = "adicionar" }) {
           <Campo label="Resumo do material:" name="resumo">
             <textarea
               id="resumo"
+              name="resumo"
               rows="4"
+              value={valores.resumo}
+              onChange={handleChange}
               placeholder="Inserir um breve resumo do material."
-              defaultValue={editando ? "Um jovem que viaja para a cidade de Candeia para cumprir um pedido de sua mãe moribunda: encontrar o pai desconhecido." : ""}
             />
           </Campo>
+
+          {erro && <p className="material__aviso" role="alert">{erro}</p>}
 
           {editando ? (
             <>
               <div className="material__acoes material__acoes--entre">
-                <button type="button" className="material__botao">Deletar <Lixeira /></button>
+                <button type="button" className="material__botao" onClick={handleDeletar}>Deletar <Lixeira /></button>
                 <button type="submit" className="material__botao">Salvar <Marcador /></button>
               </div>
               <button type="button" className="material__botao material__botao--contorno material__botao--largo" onClick={() => navigate("/acervo")}>

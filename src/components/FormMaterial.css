@@ -187,3 +187,16 @@
 .material__botao--largo {
   width: 100%;
 }
+
+.material__capa img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.2rem;
+  object-fit: cover;
+}
+
+.material__aviso {
+  font-size: 0.8rem;
+}

@@ -17,7 +17,7 @@ function App() {
       <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/acervo" element={<Acervo />} />
       <Route path="/adicionar-material" element={<AdicionarMaterial />} />
-      <Route path="/editar-material" element={<EditarMaterial />} />
+      <Route path="/editar-material/:id" element={<EditarMaterial />} />
     </Routes>
   );
 }
