@@ -4,12 +4,96 @@
       "id": "1",
       "titulo": "A cabeça do santo",
       "autor": "Socorro Acioli",
+      "capaUrl": "/capas/a-cabeca-do-santo.jpg",
       "ano": 2016,
       "paginas": 176,
       "isbn": "",
       "editora": "Companhia das Letras",
-      "resumo": "Um jovem que viaja para a cidade de Candeia para cumprir o pedido de sua mãe moribunda: encontrar o pai desconhecido.",
-      "capaUrl": ""
+      "resumo": "Um jovem que viaja para a cidade de Candeia para cumprir o pedido de sua mãe moribunda: encontrar o pai desconhecido."
+    },
+    {
+      "id": "2",
+      "titulo": "Oração para desaparecer",
+      "autor": "Socorro Acioli",
+      "capaUrl": "/capas/oracao-para-desaparecer.jpg"
+    },
+    {
+      "id": "3",
+      "titulo": "A biblioteca da meia-noite",
+      "autor": "Matt Haig",
+      "capaUrl": "/capas/a-biblioteca-da-meia-noite.jpg"
+    },
+    {
+      "id": "4",
+      "titulo": "Nunca vi a chuva",
+      "autor": "Stefano Volp",
+      "capaUrl": "/capas/nunca-vi-a-chuva.jpg"
+    },
+    {
+      "id": "5",
+      "titulo": "Canção para ninar menino grande",
+      "autor": "Conceição Evaristo",
+      "capaUrl": "/capas/cancao-para-ninar-menino-grande.jpg"
+    },
+    {
+      "id": "6",
+      "titulo": "Três",
+      "autor": "Valérie Perrin",
+      "capaUrl": "/capas/tres.jpg"
+    },
+    {
+      "id": "7",
+      "titulo": "O avesso da pele",
+      "autor": "Jeferson Tenório",
+      "capaUrl": "/capas/o-avesso-da-pele.jpg"
+    },
+    {
+      "id": "8",
+      "titulo": "Garota, mulher, outras",
+      "autor": "Bernardine Evaristo",
+      "capaUrl": "/capas/garota-mulher-outras.jpg"
+    },
+    {
+      "id": "9",
+      "titulo": "Água fresca para as flores",
+      "autor": "Valérie Perrin",
+      "capaUrl": "/capas/agua-fresca-para-as-flores.jpg"
+    },
+    {
+      "id": "10",
+      "titulo": "Amor(es) verdadeiro(s)",
+      "autor": "Taylor Jenkins Reid",
+      "capaUrl": "/capas/amor-es-verdadeiro-s.jpg"
+    },
+    {
+      "id": "11",
+      "titulo": "Daisy Jones & The Six",
+      "autor": "Taylor Jenkins Reid",
+      "capaUrl": "/capas/daisy-jones-and-the-six.jpg"
+    },
+    {
+      "id": "12",
+      "titulo": "Torto arado",
+      "autor": "Itamar Vieira Junior",
+      "capaUrl": "/capas/torto-arado.jpg"
+    },
+    {
+      "id": "13",
+      "titulo": "O conto da aia",
+      "autor": "Margaret Atwood",
+      "capaUrl": "/capas/o-conto-da-aia.jpg"
+    },
+    {
+      "id": "14",
+      "titulo": "Os sete maridos de Evelyn Hugo",
+      "autor": "Taylor Jenkins Reid",
+      "capaUrl": "/capas/os-sete-maridos-de-evelyn-hugo.jpg"
+    },
+    {
+      "id": "15",
+      "titulo": "Em busca de mim",
+      "autor": "Viola Davis",
+      "capaUrl": "/capas/em-busca-de-mim.jpg"
     }
   ]
 }
