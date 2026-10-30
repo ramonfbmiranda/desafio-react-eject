@@ -18,10 +18,15 @@
       "capaUrl": "/capas/oracao-para-desaparecer.jpg"
     },
     {
-      "id": "3",
       "titulo": "A biblioteca da meia-noite",
+      "paginas": 0,
+      "isbn": "",
       "autor": "Matt Haig",
-      "capaUrl": "/capas/a-biblioteca-da-meia-noite.jpg"
+      "ano": 0,
+      "editora": "",
+      "resumo": "",
+      "capaUrl": "/capas/a-biblioteca-da-meia-noite.jpg",
+      "id": "3"
     },
     {
       "id": "4",
@@ -95,5 +100,6 @@
       "autor": "Viola Davis",
       "capaUrl": "/capas/em-busca-de-mim.jpg"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
