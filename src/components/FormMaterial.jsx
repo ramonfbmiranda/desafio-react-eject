@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import Rodape from "./Rodape";
 import "./FormMaterial.css";
 import { buscarPorIsbn, limparIsbn } from "../services/isbn";
@@ -31,13 +31,16 @@ const VAZIO = { titulo: "", paginas: "", isbn: "", autor: "", ano: "", editora: 
 function FormMaterial({ modo = "adicionar" }) {
   const navigate = useNavigate();
   const editando = modo === "editar";
+  
   const { id } = useParams();
 
+  const { recarregar } = useOutletContext();
+  
   const [valores, setValores] = useState(VAZIO);
   const [buscandoIsbn, setBuscandoIsbn] = useState(false);
   const [avisoIsbn, setAvisoIsbn] = useState("");
   const [erro, setErro] = useState("");
-
+  
   useEffect(() => {
     if (editando && id) {
       buscarLivro(id)
@@ -85,6 +88,7 @@ function FormMaterial({ modo = "adicionar" }) {
     try {
       if (editando) await atualizarLivro(id, dados);
       else await criarLivro(dados);
+      await recarregar(); 
       navigate("/acervo");
     } catch {
       setErro("Não foi possível salvar. Confira se a API está rodando.");
@@ -94,7 +98,7 @@ function FormMaterial({ modo = "adicionar" }) {
   async function handleDeletar() {
     setErro("");
     try {
-      await deletarLivro(id);
+      await recarregar();
       navigate("/acervo");
     } catch {
       setErro("Não foi possível deletar. Confira se a API está rodando.");

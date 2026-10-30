@@ -3,6 +3,11 @@
   min-height: 100vh;
   background: var(--cor-branco);
   color: var(--vinho);
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .material__header {
