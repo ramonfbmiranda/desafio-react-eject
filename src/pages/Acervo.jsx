@@ -146,14 +146,14 @@ function Acervo() {
             </li>
           ))}
         </ul>
-
+{/* (RETIREI BOTÕES PORQUE NÃO TEM SENTIDO)
         <nav className="acervo__paginacao" aria-label="Paginação">
           <button type="button" className="acervo__seta" aria-label="Página anterior">‹</button>
           <button type="button">1</button>
           <button type="button" className="acervo__pagina--ativa" aria-current="page">2</button>
           <button type="button">3</button>
           <button type="button" className="acervo__seta" aria-label="Próxima página">›</button>
-        </nav>
+        </nav> */}
       </section>
 
       <Link to="/adicionar-material" className="acervo__adicionar" aria-label="Adicionar material">
