@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+
 import "./Acervo.css";
 import Rodape from "../components/Rodape";
 import { listarLivros } from "../services/api";
 import { urlCapa } from "../services/isbn";
+import { Link, Outlet } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
 
 function IconeUsuario() {
   return (
@@ -56,15 +57,14 @@ function Acervo() {
   const [livros, setLivros] = useState([]);
   const [erro, setErro] = useState("");
 
-  useEffect(() => {
-    let cancelado = false;
-    listarLivros()
-      .then((dados) => !cancelado && setLivros(dados))
-      .catch((e) => !cancelado && setErro(e.message));
-    return () => {
-      cancelado = true;
-    };
-  }, []);
+    const carregar = useCallback(
+      () => listarLivros().then(setLivros).catch((e) => setErro(e.message)),
+      []
+    );
+
+    useEffect(() => {
+      carregar();
+    }, [carregar]);
 
   const destaques = livros.slice(0, 5);
   const destaque = destaques[0];
@@ -106,7 +106,7 @@ function Acervo() {
               <ImgCapa livro={livro} />
               <Link
                 className="acervo__destaque-link"
-                to={`/editar-material/${livro.id}`}
+                to={`/acervo/editar-material/${livro.id}`}
                 aria-label={`Abrir ${livro.titulo}`}
               >
                 <IconeSeta />
@@ -138,7 +138,8 @@ function Acervo() {
         <ul className="acervo__grade">
           {livros.map((livro) => (
             <li key={livro.id}>
-              <Link to={`/editar-material/${livro.id}`}>
+              <Link
+               to={`/acervo/editar-material/${livro.id}`}>
                 <div className="acervo__capa">
                   <ImgCapa livro={livro} />
                 </div>
@@ -159,7 +160,9 @@ function Acervo() {
       <Link to="/adicionar-material" className="acervo__adicionar" aria-label="Adicionar material">
         <IconeMais />
       </Link>
-
+      
+      <Outlet context={{ recarregar: carregar }} />
+      
       <Rodape />
     </div>
   );
