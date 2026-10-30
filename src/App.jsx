@@ -4,8 +4,8 @@ import RecuperarSenha from "./pages/RecuperarSenha";
 import RedefinirSenha from "./pages/RedefinirSenha";
 import Cadastro from "./pages/Cadastro";
 import Acervo from "./pages/Acervo";
-import AdicionarMaterial from "./pages/AdicionarMaterial";
-import EditarMaterial from "./pages/EditarMaterial";
+import AdicionarMaterial from "./components/AdicionarMaterial";
+import EditarMaterial from "./components/EditarMaterial";
 
 function App() {
   return (
@@ -15,9 +15,10 @@ function App() {
       <Route path="/recuperar-senha" element={<RecuperarSenha />} />
       <Route path="/redefinir-senha" element={<RedefinirSenha />} />
       <Route path="/cadastro" element={<Cadastro />} />
-      <Route path="/acervo" element={<Acervo />} />
-      <Route path="/adicionar-material" element={<AdicionarMaterial />} />
-      <Route path="/editar-material/:id" element={<EditarMaterial />} />
+      <Route path="/acervo" element={<Acervo />}>
+        <Route path="adicionar-material" element={<AdicionarMaterial />} />
+        <Route path="editar-material/:id" element={<EditarMaterial />} />
+      </Route>
     </Routes>
   );
 }
